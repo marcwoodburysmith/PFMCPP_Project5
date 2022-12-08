@@ -412,12 +412,9 @@ float Cafeteria::fillCoffeeMaker()
         coffeeMaker.waterRemaining = 1000;
         return coffeeMaker.waterRemaining;
     }
-    else
-    {
-        std::cout << "Reservoir does not need filling " << std::endl;
-        return coffeeMaker.waterRemaining;
-    }
-       
+    
+    std::cout << "Reservoir does not need filling " << std::endl;
+    return coffeeMaker.waterRemaining;    
 }
 
 
