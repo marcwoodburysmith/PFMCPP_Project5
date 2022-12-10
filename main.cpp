@@ -117,6 +117,7 @@ struct CoffeeMaker
         void setCupVolume(float vol);
         bool getCleanStatus(); 
         void setCupColour(std::string col);
+        void printCupMemberInfo();
 
         bool fillingCup(float vol);
     };
@@ -125,6 +126,7 @@ struct CoffeeMaker
     std::string coffeeType();
     void switchOff();
     float settingTemperature(float waterTemp);
+    void printCoffeeMakerMemberInfo();
 
     Cup customerCup;
 
@@ -168,6 +170,10 @@ bool CoffeeMaker::Cup::fillingCup(float vol)
     return cupFull;
 }
 
+void CoffeeMaker::Cup::printCupMemberInfo()
+{
+    std::cout << "Cup volume: " << this->volume << " Clean status: " << this->getCleanStatus() << std::endl;
+}
 
 void CoffeeMaker::heatWater()
 {
@@ -196,6 +202,11 @@ float CoffeeMaker::settingTemperature(float waterTemp)
     }
     std::cout << "Temperature reached" << std::endl;
     return maxWaterTemp;
+}
+
+void CoffeeMaker::printCoffeeMakerMemberInfo()
+{
+    std::cout << "Switched on status: " << this->switchedOn << " Coffee type: " << this->coffeeType() << std::endl;
 }
 
 /*
@@ -233,12 +244,14 @@ struct Dentist
         int dateOfNextDentalAppointment(int lastCheck); 
         std::string getGender(); 
         void numberOfAppointments(int howOld);
+        void printPersonMemberInfo();
     };
 
     int returnLastCheck(std::string name);
     float feeForService(std::string treatmentClassification);
     int payStaff(); 
     int costPerPatient(int num);
+    void printDentistMemberInfo();
 
     Person newPatient;
 };
@@ -282,6 +295,11 @@ void Dentist::Person::numberOfAppointments(int howOld)
     std::cout << "Number of appointments: " << appts << std::endl;   
 }
 
+void Dentist::Person::printPersonMemberInfo()
+{
+    std::cout << "Person's name " << this->name << " Person's gender: " << this->getGender() << std::endl;
+}
+
 
 int Dentist::returnLastCheck(std::string name)
 {
@@ -318,6 +336,11 @@ int Dentist::costPerPatient(int num)
     return profitPerWeek;
 }
 
+void Dentist::printDentistMemberInfo()
+{
+    std::cout << "Dentist name: " << this->dentistName << " Fee for service (other): " << this->feeForService("other") << std::endl;
+}
+
 /*
  copied UDT 3:
  */
@@ -339,6 +362,7 @@ struct ATM
     int displayBalance(int accountNum); 
     void dispenseReceipt(double amountWithdrawn);
     double dispensingCash(double amountWithdrawn);
+    void printATMInfo();
 };
 
 ATM::ATM()
@@ -377,6 +401,12 @@ double ATM::dispensingCash(double amountWithdrawn)
     return maxAmountAvailable;
 }
 
+
+void ATM::printATMInfo()
+{
+    std::cout << "Max amount available: " << this->maxAmountAvailable << " Number of customers: " << this->numCustomers << std::endl;
+}
+
 /*
  new UDT 4:
  with 2 member functions
@@ -387,6 +417,7 @@ struct Cafeteria
     Cafeteria()
     {
         coffeeMaker.switchedOn = true;
+        cup1.colour = "blue";
         std::cout << "Cafeteria constructor called" << std::endl;
     }
     ~Cafeteria() 
@@ -400,6 +431,7 @@ struct Cafeteria
 
     void serveCustomer(std::string type, std::string col);
     float fillCoffeeMaker(); 
+    void printCafeteriaInfo();
 };
 
 void Cafeteria::serveCustomer(std::string type, std::string col)
@@ -420,6 +452,13 @@ float Cafeteria::fillCoffeeMaker()
     
     std::cout << "Reservoir does not need filling " << std::endl;
     return coffeeMaker.waterRemaining;    
+}
+
+void Cafeteria::printCafeteriaInfo()
+{ 
+    std::cout << "On/off status " << this->coffeeMaker.switchedOn << std::endl;
+    std::cout << "Cup 1 colour " << this->cup1.colour << std::endl;
+    //std::cout << "Serve customer " << this->serveCustomer("latte", "blue") << std::endl;
 }
 
 
@@ -445,8 +484,10 @@ struct DentalHospital
 
     void allocatePatientToDentist(std::string nme); 
     void profitByDentist(int numPatients1, int numPatients2);
+    void printDentalHospitalInfo();
     
 };
+
 
 void DentalHospital::allocatePatientToDentist(std::string nme)
 {
@@ -463,6 +504,11 @@ void DentalHospital::profitByDentist(int numPatients1, int numPatients2)
     std::cout << "Dentist 1 profit: " << dentist1Profit << std::endl;
     int dentist2Profit = ((dentist2.patientsPerWeek * dentist2.chargePerPatient) - dentist2.costDisposableEquipment);
     std::cout << "Dentist 2 profit: " << dentist2Profit << std::endl;
+}
+
+void DentalHospital::printDentalHospitalInfo()
+{
+    std::cout << "Dentist names: " << this->dentist1.dentistName << " " << this->dentist2.dentistName << std::endl;
 }
 
 /*
@@ -488,18 +534,30 @@ int main()
     coffeemaker.switchedOn = true;
     coffeemaker.switchOff();
     coffeemaker.settingTemperature(60);
+    
+    
+    std::cout << "Switched on status: " << coffeemaker.switchedOn << " Coffee type: " << coffeemaker.coffeeType() << std::endl;
+    coffeemaker.printCoffeeMakerMemberInfo();
 
     CoffeeMaker::Cup cup;
     cup.setCupVolume(250);
     cup.getCleanStatus();
     cup.setCupColour("Green");
     cup.fillingCup(200);
+    
+   
+    std::cout << "Cup volume " << cup.volume << " Clean status: " << cup.getCleanStatus() << std::endl;
+    cup.printCupMemberInfo();
 
     Dentist dentist;
     dentist.returnLastCheck("Mary");
     dentist.feeForService("bridge work");
     dentist.payStaff();
     dentist.costPerPatient(4);
+    
+    
+    std::cout << "Dentist name: " << dentist.dentistName << " Fee for service (other): " << dentist.feeForService("other") << std::endl;
+    dentist.printDentistMemberInfo();
 
     Dentist::Person person;
     person.name = "Mary";
@@ -508,20 +566,35 @@ int main()
     person.getGender();
     person.numberOfAppointments(24);
     
+   
+    std::cout << "Person's name: " << person.name << " Person's gender " << person.getGender() << std::endl;
+    person.printPersonMemberInfo();
+    
     ATM atm;
     atm.dispenseCash();
     atm.displayBalance(12345678);
     atm.dispenseReceipt(250);
     atm.dispensingCash(200);
+    
+    
+    std::cout << "Max amount available: " << atm.maxAmountAvailable << " Number of customers: " << atm.numCustomers << std::endl;
+    atm.printATMInfo();
+    
 
     DentalHospital centervilleHospital;
     centervilleHospital.allocatePatientToDentist("Amanda");
     centervilleHospital.profitByDentist(16, 32);
 
+    std::cout << "Dentist names: " << centervilleHospital.dentist1.dentistName << " " << centervilleHospital.dentist2.dentistName  << std::endl;
+    centervilleHospital.printDentalHospitalInfo();
+
 
     Cafeteria centervilleCafe;
     centervilleCafe.serveCustomer("frothy", "blue");
     centervilleCafe.fillCoffeeMaker();
+
+    std::cout << "On/off status " << centervilleCafe.coffeeMaker.switchedOn << " Cup 1 colour " << centervilleCafe.cup1.colour << std::endl;
+    centervilleCafe.printCafeteriaInfo();
     
     std::cout << "good to go!" << std::endl;
 }
