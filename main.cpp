@@ -528,55 +528,55 @@ void DentalHospital::printDentalHospitalInfo()
 #include <iostream>
 int main()
 {
-    /*CoffeeMaker coffeemaker;
+    CoffeeMaker coffeemaker;
     coffeemaker.heatWater();
     coffeemaker.coffeeType();
     coffeemaker.switchedOn = true;
     coffeemaker.switchOff();
-    coffeemaker.settingTemperature(60);*/
+    coffeemaker.settingTemperature(60);
     
-    CoffeeMaker coffeemaker;
+    
     std::cout << "Switched on status: " << coffeemaker.switchedOn << " Coffee type: " << coffeemaker.coffeeType() << std::endl;
     coffeemaker.printCoffeeMakerMemberInfo();
 
-    /*CoffeeMaker::Cup cup;
+    CoffeeMaker::Cup cup;
     cup.setCupVolume(250);
     cup.getCleanStatus();
     cup.setCupColour("Green");
-    cup.fillingCup(200);*/
+    cup.fillingCup(200);
     
-    CoffeeMaker::Cup cup;
+   
     std::cout << "Cup volume " << cup.volume << " Clean status: " << cup.getCleanStatus() << std::endl;
     cup.printCupMemberInfo();
 
-    /*Dentist dentist;
+    Dentist dentist;
     dentist.returnLastCheck("Mary");
     dentist.feeForService("bridge work");
     dentist.payStaff();
-    dentist.costPerPatient(4);*/
+    dentist.costPerPatient(4);
     
-    Dentist dentist;
+    
     std::cout << "Dentist name: " << dentist.dentistName << " Fee for service (other): " << dentist.feeForService("other") << std::endl;
     dentist.printDentistMemberInfo();
 
-    /*Dentist::Person person;
+    Dentist::Person person;
     person.name = "Mary";
     person.getInsuranceCompany("Axis");
     person.dateOfNextDentalAppointment(112022);
     person.getGender();
-    person.numberOfAppointments(24);*/
+    person.numberOfAppointments(24);
     
-    Dentist::Person person;
+   
     std::cout << "Person's name: " << person.name << " Person's gender " << person.getGender() << std::endl;
     person.printPersonMemberInfo();
     
-    /*ATM atm;
+    ATM atm;
     atm.dispenseCash();
     atm.displayBalance(12345678);
     atm.dispenseReceipt(250);
-    atm.dispensingCash(200);*/
+    atm.dispensingCash(200);
     
-    ATM atm;
+    
     std::cout << "Max amount available: " << atm.maxAmountAvailable << " Number of customers: " << atm.numCustomers << std::endl;
     atm.printATMInfo();
     
