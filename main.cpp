@@ -85,6 +85,7 @@ void Axe::aConstMemberFunction() const { }
  */
 
 #include <iostream>
+#include "LeakedObjectDetector.h"
 
 struct CoffeeMaker
 {   
@@ -134,6 +135,19 @@ struct CoffeeMaker
 
     Cup customerCup;
 
+    JUCE_LEAK_DETECTOR(CoffeeMaker)
+
+};
+
+struct CoffeeMakerWrapper
+{
+    CoffeeMakerWrapper(CoffeeMaker* ptr) : ptrToCoffeeMaker(ptr) { }
+    ~CoffeeMakerWrapper()
+    {
+        delete ptrToCoffeeMaker;
+    }
+
+    CoffeeMaker* ptrToCoffeeMaker = nullptr;
 };
 
 CoffeeMaker::Cup::Cup()
@@ -258,7 +272,21 @@ struct Dentist
     void printDentistMemberInfo();
 
     Person newPatient;
+
+    JUCE_LEAK_DETECTOR(Dentist)
 };
+
+struct DentistWrapper
+{
+    DentistWrapper(Dentist* ptr) : ptrToDentist(ptr) { }
+    ~DentistWrapper()
+    {
+        delete ptrToDentist;
+    }
+
+    Dentist* ptrToDentist = nullptr;
+};
+
 
 
 Dentist::Person::Person()
@@ -367,7 +395,21 @@ struct ATM
     void dispenseReceipt(double amountWithdrawn);
     double dispensingCash(double amountWithdrawn);
     void printATMInfo();
+
+    JUCE_LEAK_DETECTOR(ATM)
 };
+
+struct ATMWrapper
+{
+    ATMWrapper(ATM* ptr) : ptrToATM(ptr) { }
+    ~ATMWrapper()
+    {
+        delete ptrToATM;
+    }
+
+    Dentist* ptrToATM = nullptr;
+};
+
 
 ATM::ATM()
 {
@@ -436,6 +478,19 @@ struct Cafeteria
     void serveCustomer(std::string type, std::string col);
     float fillCoffeeMaker(); 
     void printCafeteriaInfo();
+
+    JUCE_LEAK_DETECTOR(Cafeteria)
+};
+
+struct CafeteriaWrapper
+{
+    CafeteriaWrapper(Cafeteria* ptr) : ptrToCafeteria(ptr) { }
+    ~CafeteriaWrapper()
+    {
+        delete ptrToCafeteria;
+    }
+
+    Cafeteria* ptrToCafeteria = nullptr;
 };
 
 void Cafeteria::serveCustomer(std::string type, std::string col)
@@ -489,7 +544,20 @@ struct DentalHospital
     void allocatePatientToDentist(std::string nme); 
     void profitByDentist(int numPatients1, int numPatients2);
     void printDentalHospitalInfo();
+
+    JUCE_LEAK_DETECTOR(DentalHospital)
     
+};
+
+struct DentalHospitalWrapper
+{
+    DentalHospitalWrapper(DentalHospital* ptr) : ptrToDentalHospital(ptr) { }
+    ~DentalHospitalWrapper()
+    {
+        delete ptrToDentalHospital;
+    }
+
+    DentalHospital* ptrToDentalHospital = nullptr;
 };
 
 
@@ -532,16 +600,22 @@ void DentalHospital::printDentalHospitalInfo()
 #include <iostream>
 int main()
 {
-    CoffeeMaker coffeemaker;
+    /*CoffeeMaker coffeemaker;
     coffeemaker.heatWater();
     coffeemaker.coffeeType();
     coffeemaker.switchedOn = true;
     coffeemaker.switchOff();
-    coffeemaker.settingTemperature(60);
-    
-    
-    std::cout << "Switched on status: " << coffeemaker.switchedOn << " Coffee type: " << coffeemaker.coffeeType() << std::endl;
-    coffeemaker.printCoffeeMakerMemberInfo();
+    coffeemaker.settingTemperature(60);*/
+
+    CoffeeMakerWrapper coffeeMakerWrapper(new CoffeeMaker() );
+    coffeeMakerWrapper.ptrToCoffeeMaker->heatWater();
+    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType();
+    coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn = true;
+    coffeeMakerWrapper.ptrToCoffeeMaker->switchOff();
+    coffeeMakerWrapper.ptrToCoffeeMaker->settingTemperature(60);
+
+    std::cout << "Switched on status: " << coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn << " Coffee type: " <<    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType() << std::endl;
+    coffeeMakerWrapper.ptrToCoffeeMaker->printCoffeeMakerMemberInfo();
 
     CoffeeMaker::Cup cup;
     cup.setCupVolume(250);
@@ -553,15 +627,21 @@ int main()
     std::cout << "Cup volume " << cup.volume << " Clean status: " << cup.getCleanStatus() << std::endl;
     cup.printCupMemberInfo();
 
-    Dentist dentist;
+    /*Dentist dentist;
     dentist.returnLastCheck("Mary");
     dentist.feeForService("bridge work");
     dentist.payStaff();
-    dentist.costPerPatient(4);
+    dentist.costPerPatient(4);*/
+
+    DentistWrapper dentistWrapper(new Dentist() );
+    dentistWrapper.ptrToDentist->returnLastCheck("Mary");
+    dentistWrapper.ptrToDentist->feeForService("bridge work");
+    dentistWrapper.ptrToDentist->payStaff();
+    dentistWrapper.ptrToDentist->costPerPatient(4);
     
     
-    std::cout << "Dentist name: " << dentist.dentistName << " Fee for service (other): " << dentist.feeForService("other") << std::endl;
-    dentist.printDentistMemberInfo();
+    std::cout << "Dentist name: " << dentistWrapper.ptrToDentist->dentistName << " Fee for service (other): " << dentistWrapper.ptrToDentist->feeForService("other") << std::endl;
+    dentistWrapper.ptrToDentist->printDentistMemberInfo();
 
     Dentist::Person person;
     person.name = "Mary";
@@ -574,23 +654,37 @@ int main()
     std::cout << "Person's name: " << person.name << " Person's gender " << person.getGender() << std::endl;
     person.printPersonMemberInfo();
     
-    ATM atm;
+    /*ATM atm;
     atm.dispenseCash();
     atm.displayBalance(12345678);
     atm.dispenseReceipt(250);
-    atm.dispensingCash(200);
+    atm.dispensingCash(200);*/
+
+    ATMWrapper atmWrapper(new ATM() );
+    atmWrapper.ptrToATM->dispenseCash();
+    atmWrapper.ptrToATM->displayBalance(12345678);
+    atmWrapper.ptrToATM->dispenseReceipt(250);
+    atmWrapper.ptrToATM->dispensingCash(200)
     
     
-    std::cout << "Max amount available: " << atm.maxAmountAvailable << " Number of customers: " << atm.numCustomers << std::endl;
+    std::cout << "Max amount available: " << atmWrapper.ptrToATM->maxAmountAvailable << " Number of customers: " << atmWrapper.ptrToATM->numCustomers << std::endl;
     atm.printATMInfo();
     
 
-    DentalHospital centervilleHospital;
+    /*DentalHospital centervilleHospital;
+    centervilleHospital.allocatePatientToDentist("Amanda");
+    centervilleHospital.profitByDentist(16, 32);
+
+    std::cout << "Dentist names: " << centervilleHospital.dentist1.dentistName << " " << centervilleHospital.dentist2.dentistName  << std::endl;
+    centervilleHospital.printDentalHospitalInfo();*/
+
+    DentalHospitalWrapper dentalHospitalWrapper(new DentalHospital() );
     centervilleHospital.allocatePatientToDentist("Amanda");
     centervilleHospital.profitByDentist(16, 32);
 
     std::cout << "Dentist names: " << centervilleHospital.dentist1.dentistName << " " << centervilleHospital.dentist2.dentistName  << std::endl;
     centervilleHospital.printDentalHospitalInfo();
+    
 
 
     Cafeteria centervilleCafe;
