@@ -85,6 +85,7 @@ void Axe::aConstMemberFunction() const { }
  */
 
 #include <iostream>
+#include "LeakedObjectDetector.h"
 
 struct CoffeeMaker
 {   
@@ -123,7 +124,7 @@ struct CoffeeMaker
         void setCupColour(std::string col);
         void printCupMemberInfo();
 
-        bool fillingCup(float vol);
+        bool fillingCup(const float& vol);
     };
 
     void heatWater();
@@ -134,7 +135,10 @@ struct CoffeeMaker
 
     Cup customerCup;
 
+    JUCE_LEAK_DETECTOR(CoffeeMaker)
+
 };
+
 
 CoffeeMaker::Cup::Cup()
 {
@@ -161,7 +165,7 @@ void CoffeeMaker::Cup::setCupColour(std::string col)
     std::cout << "Colour set as: " << colour << std::endl;
 }
 
-bool CoffeeMaker::Cup::fillingCup(float vol)
+bool CoffeeMaker::Cup::fillingCup(const float& vol)
 {
     float level = 0;
     while(level < vol)
@@ -252,12 +256,14 @@ struct Dentist
     };
 
     int returnLastCheck(std::string name);
-    float feeForService(std::string treatmentClassification);
+    float feeForService(const std::string& treatmentClassification);
     int payStaff(); 
     int costPerPatient(int num);
     void printDentistMemberInfo();
 
     Person newPatient;
+
+    JUCE_LEAK_DETECTOR(Dentist)
 };
 
 
@@ -312,7 +318,7 @@ int Dentist::returnLastCheck(std::string name)
     return newPatient.dateOfLastCheck;
 }
 
-float Dentist::feeForService(std::string treatmentClassification)
+float Dentist::feeForService(const std::string& treatmentClassification)
 {
     if( treatmentClassification == "check up" )
     {
@@ -365,9 +371,12 @@ struct ATM
     void dispenseCash();
     int displayBalance(int accountNum); 
     void dispenseReceipt(double amountWithdrawn);
-    double dispensingCash(double amountWithdrawn);
+    double dispensingCash(const double& amountWithdrawn);
     void printATMInfo();
+
+    JUCE_LEAK_DETECTOR(ATM)
 };
+
 
 ATM::ATM()
 {
@@ -393,7 +402,7 @@ void ATM::dispenseReceipt(double amountWithdrawn)
     std::cout << "Current amount available " << currentAmountAvailable << std::endl;
 }
 
-double ATM::dispensingCash(double amountWithdrawn)
+double ATM::dispensingCash(const double& amountWithdrawn)
 {
     double amountDispensed = 0;
     while (amountDispensed < amountWithdrawn)
@@ -436,7 +445,10 @@ struct Cafeteria
     void serveCustomer(std::string type, std::string col);
     float fillCoffeeMaker(); 
     void printCafeteriaInfo();
+
+    JUCE_LEAK_DETECTOR(Cafeteria)
 };
+
 
 void Cafeteria::serveCustomer(std::string type, std::string col)
 {
@@ -489,6 +501,8 @@ struct DentalHospital
     void allocatePatientToDentist(std::string nme); 
     void profitByDentist(int numPatients1, int numPatients2);
     void printDentalHospitalInfo();
+
+    JUCE_LEAK_DETECTOR(DentalHospital)
     
 };
 
@@ -515,6 +529,65 @@ void DentalHospital::printDentalHospitalInfo()
     std::cout << "Dentist names: " << this->dentist1.dentistName << " " << this->dentist2.dentistName << std::endl;
 }
 
+//Wrappers
+
+struct CoffeeMakerWrapper
+{
+    CoffeeMakerWrapper(CoffeeMaker* ptr) : ptrToCoffeeMaker(ptr) { }
+    ~CoffeeMakerWrapper()
+    {
+        delete ptrToCoffeeMaker;
+    }
+
+    CoffeeMaker* ptrToCoffeeMaker = nullptr;
+};
+
+struct DentistWrapper
+{
+    DentistWrapper(Dentist* ptr) : ptrToDentist(ptr) { }
+    ~DentistWrapper()
+    {
+        delete ptrToDentist;
+    }
+
+    Dentist* ptrToDentist = nullptr;
+};
+
+struct ATMWrapper
+{
+    ATMWrapper(ATM* ptr) : ptrToATM(ptr) { }
+    ~ATMWrapper()
+    {
+        delete ptrToATM;
+    }
+
+    ATM* ptrToATM = nullptr;
+};
+
+struct CafeteriaWrapper
+{
+    CafeteriaWrapper(Cafeteria* ptr) : ptrToCafeteria(ptr) { }
+    ~CafeteriaWrapper()
+    {
+        delete ptrToCafeteria;
+    }
+
+    Cafeteria* ptrToCafeteria = nullptr;
+};
+
+struct DentalHospitalWrapper
+{
+    DentalHospitalWrapper(DentalHospital* ptr) : ptrToDentalHospital(ptr) { }
+    ~DentalHospitalWrapper()
+    {
+        delete ptrToDentalHospital;
+    }
+
+    DentalHospital* ptrToDentalHospital = nullptr;
+};
+
+
+
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
@@ -532,16 +605,16 @@ void DentalHospital::printDentalHospitalInfo()
 #include <iostream>
 int main()
 {
-    CoffeeMaker coffeemaker;
-    coffeemaker.heatWater();
-    coffeemaker.coffeeType();
-    coffeemaker.switchedOn = true;
-    coffeemaker.switchOff();
-    coffeemaker.settingTemperature(60);
-    
-    
-    std::cout << "Switched on status: " << coffeemaker.switchedOn << " Coffee type: " << coffeemaker.coffeeType() << std::endl;
-    coffeemaker.printCoffeeMakerMemberInfo();
+   
+    CoffeeMakerWrapper coffeeMakerWrapper(new CoffeeMaker() );
+    coffeeMakerWrapper.ptrToCoffeeMaker->heatWater();
+    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType();
+    coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn = true;
+    coffeeMakerWrapper.ptrToCoffeeMaker->switchOff();
+    coffeeMakerWrapper.ptrToCoffeeMaker->settingTemperature(60);
+
+    std::cout << "Switched on status: " << coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn << " Coffee type: " <<    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType() << std::endl;
+    coffeeMakerWrapper.ptrToCoffeeMaker->printCoffeeMakerMemberInfo();
 
     CoffeeMaker::Cup cup;
     cup.setCupVolume(250);
@@ -553,15 +626,15 @@ int main()
     std::cout << "Cup volume " << cup.volume << " Clean status: " << cup.getCleanStatus() << std::endl;
     cup.printCupMemberInfo();
 
-    Dentist dentist;
-    dentist.returnLastCheck("Mary");
-    dentist.feeForService("bridge work");
-    dentist.payStaff();
-    dentist.costPerPatient(4);
+    DentistWrapper dentistWrapper(new Dentist() );
+    dentistWrapper.ptrToDentist->returnLastCheck("Mary");
+    dentistWrapper.ptrToDentist->feeForService("bridge work");
+    dentistWrapper.ptrToDentist->payStaff();
+    dentistWrapper.ptrToDentist->costPerPatient(4);
     
     
-    std::cout << "Dentist name: " << dentist.dentistName << " Fee for service (other): " << dentist.feeForService("other") << std::endl;
-    dentist.printDentistMemberInfo();
+    std::cout << "Dentist name: " << dentistWrapper.ptrToDentist->dentistName << " Fee for service (other): " << dentistWrapper.ptrToDentist->feeForService("other") << std::endl;
+    dentistWrapper.ptrToDentist->printDentistMemberInfo();
 
     Dentist::Person person;
     person.name = "Mary";
@@ -574,31 +647,32 @@ int main()
     std::cout << "Person's name: " << person.name << " Person's gender " << person.getGender() << std::endl;
     person.printPersonMemberInfo();
     
-    ATM atm;
-    atm.dispenseCash();
-    atm.displayBalance(12345678);
-    atm.dispenseReceipt(250);
-    atm.dispensingCash(200);
+
+    ATMWrapper atmWrapper(new ATM() );
+    atmWrapper.ptrToATM->dispenseCash();
+    atmWrapper.ptrToATM->displayBalance(12345678);
+    atmWrapper.ptrToATM->dispenseReceipt(250);
+    atmWrapper.ptrToATM->dispensingCash(200);
     
     
-    std::cout << "Max amount available: " << atm.maxAmountAvailable << " Number of customers: " << atm.numCustomers << std::endl;
-    atm.printATMInfo();
+    std::cout << "Max amount available: " << atmWrapper.ptrToATM->maxAmountAvailable << " Number of customers: " << atmWrapper.ptrToATM->numCustomers << std::endl;
+    atmWrapper.ptrToATM->printATMInfo();
     
 
-    DentalHospital centervilleHospital;
-    centervilleHospital.allocatePatientToDentist("Amanda");
-    centervilleHospital.profitByDentist(16, 32);
+    DentalHospitalWrapper dentalHospitalWrapper(new DentalHospital() );
+    dentalHospitalWrapper.ptrToDentalHospital->allocatePatientToDentist("Amanda");
+    dentalHospitalWrapper.ptrToDentalHospital->profitByDentist(16, 32);
 
-    std::cout << "Dentist names: " << centervilleHospital.dentist1.dentistName << " " << centervilleHospital.dentist2.dentistName  << std::endl;
-    centervilleHospital.printDentalHospitalInfo();
+    std::cout << "Dentist names: " << dentalHospitalWrapper.ptrToDentalHospital->dentist1.dentistName << " " << dentalHospitalWrapper.ptrToDentalHospital->dentist2.dentistName  << std::endl;
+    dentalHospitalWrapper.ptrToDentalHospital->printDentalHospitalInfo();
+    
 
+    CafeteriaWrapper cafeteriaWrapper(new Cafeteria() );
+    cafeteriaWrapper.ptrToCafeteria->serveCustomer("frothy", "blue");
+    cafeteriaWrapper.ptrToCafeteria->fillCoffeeMaker();
 
-    Cafeteria centervilleCafe;
-    centervilleCafe.serveCustomer("frothy", "blue");
-    centervilleCafe.fillCoffeeMaker();
-
-    std::cout << "On/off status " << centervilleCafe.coffeeMaker.switchedOn << " Cup 1 colour " << centervilleCafe.cup1.colour << std::endl;
-    centervilleCafe.printCafeteriaInfo();
+    std::cout << "On/off status " << cafeteriaWrapper.ptrToCafeteria->coffeeMaker.switchedOn << " Cup 1 colour " << cafeteriaWrapper.ptrToCafeteria->cup1.colour << std::endl;
+    cafeteriaWrapper.ptrToCafeteria->printCafeteriaInfo();
     
     std::cout << "good to go!" << std::endl;
 }
