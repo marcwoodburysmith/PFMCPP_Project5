@@ -22,7 +22,7 @@ void DentalHospital::allocatePatientToDentist(std::string nme)
     std::cout << "Hello " << patient1.name << ". Your dentist is called: " << dentist1.dentistName << std::endl;
 }
 
-void DentalHospital::profitByDentist(int numPatients1, int numPatients2)
+void DentalHospital::profitByDentist(const int& numPatients1, const int& numPatients2)
 {
     dentist1.patientsPerWeek = numPatients1;
     dentist2.patientsPerWeek = numPatients2;
@@ -32,7 +32,7 @@ void DentalHospital::profitByDentist(int numPatients1, int numPatients2)
     std::cout << "Dentist 2 profit: " << dentist2Profit << std::endl;
 }
 
-void DentalHospital::printDentalHospitalInfo()
+void DentalHospital::printDentalHospitalInfo() const
 {
     std::cout << "Dentist names: " << this->dentist1.dentistName << " " << this->dentist2.dentistName << std::endl;
 }

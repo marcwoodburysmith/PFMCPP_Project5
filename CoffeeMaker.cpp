@@ -31,7 +31,7 @@ void CoffeeMaker::Cup::setCupVolume(float vol)
     std::cout << "Cup volume set: " << volume << std::endl;
 }
 
-bool CoffeeMaker::Cup::getCleanStatus()
+bool CoffeeMaker::Cup::getCleanStatus() const
 {
     std::cout << "Clean status: " << clean << std::endl;
     return clean;  
@@ -56,7 +56,7 @@ bool CoffeeMaker::Cup::fillingCup(const float& vol)
     return cupFull;
 }
 
-void CoffeeMaker::Cup::printCupMemberInfo()
+void CoffeeMaker::Cup::printCupMemberInfo() const
 {
     std::cout << "Cup volume: " << this->volume << " Clean status: " << this->getCleanStatus() << std::endl;
 }
@@ -67,7 +67,7 @@ void CoffeeMaker::heatWater()
     std::cout << "Water heating..." << switchedOn << " Up to temp: " << maxWaterTemp << std::endl;
 }
 
-std::string CoffeeMaker::coffeeType()
+std::string CoffeeMaker::coffeeType() const
 {
     std::cout << "Type of coffee: " << typeOfCoffee << std::endl;
     return typeOfCoffee;
@@ -90,7 +90,7 @@ float CoffeeMaker::settingTemperature(float waterTemp)
     return maxWaterTemp;
 }
 
-void CoffeeMaker::printCoffeeMakerMemberInfo()
+void CoffeeMaker::printCoffeeMakerMemberInfo() const
 {
     std::cout << "Switched on status: " << this->switchedOn << " Coffee type: " << this->coffeeType() << std::endl;
 }

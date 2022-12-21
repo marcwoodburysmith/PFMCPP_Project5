@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LeakedObjectDetector.h"
+#include "CoffeeMaker.h"
 #include <iostream>
 
 struct Cafeteria
@@ -13,7 +14,7 @@ struct Cafeteria
 
     void serveCustomer(std::string type, std::string col);
     float fillCoffeeMaker(); 
-    void printCafeteriaInfo();
+    void printCafeteriaInfo() const;
 
     JUCE_LEAK_DETECTOR(Cafeteria)
 };

@@ -5,7 +5,7 @@
 #include "Cafeteria.h"
 #include "DentalHospital.h"
 
-CoffeeMakerWrapper::CoffeMakerWrapper(CoffeeMaker* ptr) : ptrToCoffeeMaker(ptr) { }
+CoffeeMakerWrapper::CoffeeMakerWrapper(CoffeeMaker* ptr) : ptrToCoffeeMaker(ptr) { }
   
 CoffeeMakerWrapper::~CoffeeMakerWrapper()
 {
@@ -42,5 +42,3 @@ DentalHospitalWrapper::~DentalHospitalWrapper()
 {
     delete ptrToDentalHospital;
 }
-
-    

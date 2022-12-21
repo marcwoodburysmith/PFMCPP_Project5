@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LeakedObjectDetector.h"
+#include "Dentist.h"
 #include <iostream>
 
 
@@ -13,8 +14,8 @@ struct DentalHospital
     Dentist::Person patient1, patient2, patient3, patient4;
 
     void allocatePatientToDentist(std::string nme); 
-    void profitByDentist(int numPatients1, int numPatients2);
-    void printDentalHospitalInfo();
+    void profitByDentist(const int& numPatients1, const int& numPatients2);
+    void printDentalHospitalInfo() const;
 
     JUCE_LEAK_DETECTOR(DentalHospital)
     

@@ -17,10 +17,8 @@ struct CoffeeMaker
     struct Cup
     {
         Cup();
-        ~Cup()
-        {
-            std::cout << "Cup destructor called" << std::endl;
-        }
+        ~Cup();
+        
 
         float volume = 250;
         bool cupFull;
@@ -29,18 +27,18 @@ struct CoffeeMaker
         bool clean;
 
         void setCupVolume(float vol);
-        bool getCleanStatus(); 
+        bool getCleanStatus() const; 
         void setCupColour(std::string col);
-        void printCupMemberInfo();
+        void printCupMemberInfo() const;
 
         bool fillingCup(const float& vol);
     };
 
     void heatWater();
-    std::string coffeeType();
+    std::string coffeeType() const;
     void switchOff();
     float settingTemperature(float waterTemp);
-    void printCoffeeMakerMemberInfo();
+    void printCoffeeMakerMemberInfo() const;
 
     Cup customerCup;
 

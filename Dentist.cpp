@@ -22,7 +22,7 @@ Dentist::Person::~Person()
     std::cout << "Person destructor called" << std::endl;
 }
 
-std::string Dentist::Person::getInsuranceCompany(std::string insurance)
+std::string Dentist::Person::getInsuranceCompany(std::string insurance) 
 {
     insuranceCompany = insurance;
     std::cout <<  name << ": Insurance Company: " << insuranceCompany << std::endl;
@@ -36,7 +36,7 @@ int Dentist::Person::dateOfNextDentalAppointment(int lastCheck)
     return dateOfLastCheck + 1;
 }
 
-std::string Dentist::Person::getGender()
+std::string Dentist::Person::getGender() const
 {
     std::cout << name << ": Gender: " << gender << std::endl;
     return gender;
@@ -53,7 +53,7 @@ void Dentist::Person::numberOfAppointments(int howOld)
     std::cout << "Number of appointments: " << appts << std::endl;   
 }
 
-void Dentist::Person::printPersonMemberInfo()
+void Dentist::Person::printPersonMemberInfo() const
 {
     std::cout << "Person's name " << this->name << " Person's gender: " << this->getGender() << std::endl;
 }

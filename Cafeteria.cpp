@@ -37,7 +37,7 @@ float Cafeteria::fillCoffeeMaker()
     return coffeeMaker.waterRemaining;    
 }
 
-void Cafeteria::printCafeteriaInfo()
+void Cafeteria::printCafeteriaInfo() const
 { 
     std::cout << "On/off status " << this->coffeeMaker.switchedOn << std::endl;
     std::cout << "Cup 1 colour " << this->cup1.colour << std::endl;

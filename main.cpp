@@ -118,6 +118,15 @@ void Axe::aConstMemberFunction() const { }
  */
 
 #include <iostream>
+
+#include "LeakedObjectDetector.h"
+#include "Wrappers.h"
+#include "ATM.h"
+#include "CoffeeMaker.h"
+#include "Cafeteria.h"
+#include "DentalHospital.h"
+#include "Dentist.h"
+
 int main()
 {
    

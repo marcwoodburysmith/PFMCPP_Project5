@@ -28,9 +28,9 @@ struct Dentist
 
         std::string getInsuranceCompany(std::string insurance); 
         int dateOfNextDentalAppointment(int lastCheck); 
-        std::string getGender(); 
+        std::string getGender() const; 
         void numberOfAppointments(int howOld);
-        void printPersonMemberInfo();
+        void printPersonMemberInfo() const;
     };
 
     int returnLastCheck(std::string name);

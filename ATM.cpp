@@ -13,19 +13,19 @@ ATM::~ATM()
     std::cout << "ATM destructor called" << std::endl;
 }
 
-void ATM::dispenseCash()
+void ATM::dispenseCash() const
 {
     std::cout << "Dispensing cash... " << std::endl;
 }
 
-int ATM::displayBalance(int accountNum)
+int ATM::displayBalance(const int accountNum)
 {
     accountNumCurrentCustomer = accountNum;
     std::cout << "Displaying balance for accout: " << accountNumCurrentCustomer << std::endl;
     return accountNumCurrentCustomer;
 }
 
-void ATM::dispenseReceipt(double amountWithdrawn)
+void ATM::dispenseReceipt(const double& amountWithdrawn)
 {
     currentAmountAvailable -= amountWithdrawn;
     std::cout << "Dispensing receipt... " << std::endl;
@@ -45,7 +45,7 @@ double ATM::dispensingCash(const double& amountWithdrawn)
 }
 
 
-void ATM::printATMInfo()
+void ATM::printATMInfo() const
 {
     std::cout << "Max amount available: " << this->maxAmountAvailable << " Number of customers: " << this->numCustomers << std::endl;
 }
