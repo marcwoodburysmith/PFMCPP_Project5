@@ -5,11 +5,9 @@
 
 struct Dentist 
 {
-    Dentist() : numStaff(5)  { }
-    ~Dentist()
-    {
-        std::cout << "Dentist destructor called" << std::endl;
-    }
+    Dentist();
+    ~Dentist();
+   
     std::string dentistName = "Mike";
     int patientsPerWeek = 40;
     int costDisposableEquipment = 200;
@@ -19,10 +17,8 @@ struct Dentist
     struct Person
     {
         Person();
-        ~Person()
-        {
-            std::cout << "Person destructor called" << std::endl;
-        }
+        ~Person();
+       
         std::string name;
         int age;
         std::string gender;

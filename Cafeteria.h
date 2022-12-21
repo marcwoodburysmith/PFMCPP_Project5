@@ -5,18 +5,9 @@
 
 struct Cafeteria
 {
-    Cafeteria()
-    {
-        coffeeMaker.switchedOn = true;
-        cup1.colour = "blue";
-        std::cout << "Cafeteria constructor called" << std::endl;
-    }
-    ~Cafeteria() 
-    { 
-        coffeeMaker.switchedOn = false;
-        std::cout << "Cafeteria destructor called" << std::endl;
-    } 
-
+    Cafeteria();
+    ~Cafeteria();
+    
     CoffeeMaker coffeeMaker;
     CoffeeMaker::Cup cup1, cup2, cup3, cup4;
 

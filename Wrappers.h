@@ -8,55 +8,40 @@ struct DentalHospital;
 
 struct CoffeeMakerWrapper
 {
-    CoffeeMakerWrapper(CoffeeMaker* ptr) : ptrToCoffeeMaker(ptr) { }
-    ~CoffeeMakerWrapper()
-    {
-        delete ptrToCoffeeMaker;
-    }
+    CoffeeMakerWrapper(CoffeeMaker* ptr);
+    ~CoffeeMakerWrapper();
 
     CoffeeMaker* ptrToCoffeeMaker = nullptr;
 };
 
 struct DentistWrapper
 {
-    DentistWrapper(Dentist* ptr) : ptrToDentist(ptr) { }
-    ~DentistWrapper()
-    {
-        delete ptrToDentist;
-    }
-
+    DentistWrapper(Dentist* ptr);
+    ~DentistWrapper();
+    
     Dentist* ptrToDentist = nullptr;
 };
 
 struct ATMWrapper
 {
-    ATMWrapper(ATM* ptr) : ptrToATM(ptr) { }
-    ~ATMWrapper()
-    {
-        delete ptrToATM;
-    }
+    ATMWrapper(ATM* ptr);
+    ~ATMWrapper();
 
     ATM* ptrToATM = nullptr;
 };
 
 struct CafeteriaWrapper
 {
-    CafeteriaWrapper(Cafeteria* ptr) : ptrToCafeteria(ptr) { }
-    ~CafeteriaWrapper()
-    {
-        delete ptrToCafeteria;
-    }
+    CafeteriaWrapper(Cafeteria* ptr);
+    ~CafeteriaWrapper();
 
     Cafeteria* ptrToCafeteria = nullptr;
 };
 
 struct DentalHospitalWrapper
 {
-    DentalHospitalWrapper(DentalHospital* ptr) : ptrToDentalHospital(ptr) { }
-    ~DentalHospitalWrapper()
-    {
-        delete ptrToDentalHospital;
-    }
-
+    DentalHospitalWrapper(DentalHospital* ptr);
+    ~DentalHospitalWrapper();
+   
     DentalHospital* ptrToDentalHospital = nullptr;
 };

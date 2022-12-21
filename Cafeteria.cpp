@@ -3,6 +3,20 @@
 #include "Cafeteria.h"
 #include <iostream>
 
+
+Cafeteria::Cafeteria()
+{
+    coffeeMaker.switchedOn = true;
+    cup1.colour = "blue";
+    std::cout << "Cafeteria constructor called" << std::endl;
+}
+    
+Cafeteria::~Cafeteria() 
+{ 
+    coffeeMaker.switchedOn = false;
+    std::cout << "Cafeteria destructor called" << std::endl;
+} 
+
 void Cafeteria::serveCustomer(std::string type, std::string col)
 {
     cup1.colour = col;

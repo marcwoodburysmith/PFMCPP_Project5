@@ -3,6 +3,18 @@
 #include "DentalHospital.h"
 #include <iostream>
 
+DentalHospital::DentalHospital()
+{
+    dentist1.dentistName = "Mike";
+    dentist2.dentistName = "Vanessa";
+}
+
+DentalHospital::~DentalHospital() 
+{
+    std::cout << "Dentist closed" << std::endl;
+}
+
+
 void DentalHospital::allocatePatientToDentist(std::string nme)
 {
     patient1.name = nme;

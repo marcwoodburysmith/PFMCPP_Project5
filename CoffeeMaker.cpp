@@ -3,11 +3,26 @@
 #include "CoffeeMaker.h"
 #include <iostream>
 
+CoffeeMaker::CoffeeMaker() : maxWaterTemp(75) 
+{ 
+    std::cout << "CoffeeMaker constructor called" << std::endl;
+}
+
+CoffeeMaker::~CoffeeMaker()
+{
+    std::cout << "CoffeeMaker destructor called" << std::endl;
+}
+
 CoffeeMaker::Cup::Cup()
 {
     std::cout << "Cup being constructed!" << std::endl;
     clean = true;
     cupFull = false;
+}
+
+CoffeeMaker::Cup:: ~Cup()
+{
+    std::cout << "Cup destructor called" << std::endl;
 }
 
 void CoffeeMaker::Cup::setCupVolume(float vol)

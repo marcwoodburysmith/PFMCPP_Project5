@@ -8,6 +8,11 @@ ATM::ATM()
     currentAmountAvailable = 20000;
 }
 
+ATM::~ATM()
+{
+    std::cout << "ATM destructor called" << std::endl;
+}
+
 void ATM::dispenseCash()
 {
     std::cout << "Dispensing cash... " << std::endl;

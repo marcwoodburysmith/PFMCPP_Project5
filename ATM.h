@@ -6,10 +6,8 @@
 struct ATM
 {
     ATM();
-    ~ATM()
-    {
-        std::cout << "ATM destructor called" << std::endl;
-    }
+    ~ATM();
+    
     double currentAmountAvailable;
     double maxAmountAvailable = 40000;
     int numCustomers = 200;

@@ -6,16 +6,8 @@
 
 struct DentalHospital
 {
-    DentalHospital()
-    {
-        dentist1.dentistName = "Mike";
-        dentist2.dentistName = "Vanessa";
-    }
-
-    ~DentalHospital() 
-    {
-        std::cout << "Dentist closed" << std::endl;
-    }
+    DentalHospital();
+    ~DentalHospital();
 
     Dentist dentist1, dentist2;
     Dentist::Person patient1, patient2, patient3, patient4;

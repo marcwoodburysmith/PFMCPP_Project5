@@ -3,11 +3,23 @@
 #include "Dentist.h"
 #include <iostream>
 
+Dentist::Dentist() : numStaff(5)  { }
+
+Dentist::~Dentist()
+{
+    std::cout << "Dentist destructor called" << std::endl;
+}
+
 Dentist::Person::Person()
 {
     name = "Mary ";
     age = 35;
     gender = "female";
+}
+
+Dentist::Person::~Person()
+{
+    std::cout << "Person destructor called" << std::endl;
 }
 
 std::string Dentist::Person::getInsuranceCompany(std::string insurance)

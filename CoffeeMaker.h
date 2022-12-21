@@ -5,16 +5,9 @@
 
 struct CoffeeMaker
 {   
-    CoffeeMaker() : maxWaterTemp(75) 
-    { 
-        std::cout << "CoffeeMaker constructor called" << std::endl;
-    }
-
-    ~CoffeeMaker()
-    {
-        std::cout << "CoffeeMaker destructor called" << std::endl;
-    }
-
+    CoffeeMaker();
+    ~CoffeeMaker();
+   
     float maxWaterTemp;
     bool switchedOn = false;
     bool milkRequested = false;
