@@ -132,19 +132,19 @@ int main()
    
     CoffeeMakerWrapper coffeeMakerWrapper(new CoffeeMaker() );
     coffeeMakerWrapper.ptrToCoffeeMaker->heatWater();
-    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType();
+    coffeeMakerWrapper.ptrToCoffeeMaker->getCoffeeType();
     coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn = true;
     coffeeMakerWrapper.ptrToCoffeeMaker->switchOff();
-    coffeeMakerWrapper.ptrToCoffeeMaker->settingTemperature(60);
+    coffeeMakerWrapper.ptrToCoffeeMaker->setTemperature(60);
 
-    std::cout << "Switched on status: " << coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn << " Coffee type: " <<    coffeeMakerWrapper.ptrToCoffeeMaker->coffeeType() << std::endl;
+    std::cout << "Switched on status: " << coffeeMakerWrapper.ptrToCoffeeMaker->switchedOn << " Coffee type: " <<    coffeeMakerWrapper.ptrToCoffeeMaker->getCoffeeType() << std::endl;
     coffeeMakerWrapper.ptrToCoffeeMaker->printCoffeeMakerMemberInfo();
 
     CoffeeMaker::Cup cup;
     cup.setCupVolume(250);
     cup.getCleanStatus();
     cup.setCupColour("Green");
-    cup.fillingCup(200);
+    cup.fillCup(200);
     
    
     std::cout << "Cup volume " << cup.volume << " Clean status: " << cup.getCleanStatus() << std::endl;
@@ -152,20 +152,20 @@ int main()
 
     DentistWrapper dentistWrapper(new Dentist() );
     dentistWrapper.ptrToDentist->returnLastCheck("Mary");
-    dentistWrapper.ptrToDentist->feeForService("bridge work");
+    dentistWrapper.ptrToDentist->getFeeForService("bridge work");
     dentistWrapper.ptrToDentist->payStaff();
-    dentistWrapper.ptrToDentist->costPerPatient(4);
+    dentistWrapper.ptrToDentist->getCostPerPatient(4);
     
     
-    std::cout << "Dentist name: " << dentistWrapper.ptrToDentist->dentistName << " Fee for service (other): " << dentistWrapper.ptrToDentist->feeForService("other") << std::endl;
+    std::cout << "Dentist name: " << dentistWrapper.ptrToDentist->dentistName << " Fee for service (other): " << dentistWrapper.ptrToDentist->getFeeForService("other") << std::endl;
     dentistWrapper.ptrToDentist->printDentistMemberInfo();
 
     Dentist::Person person;
     person.name = "Mary";
     person.getInsuranceCompany("Axis");
-    person.dateOfNextDentalAppointment(112022);
+    person.getDateOfNextDentalAppointment(112022);
     person.getGender();
-    person.numberOfAppointments(24);
+    person.getNumberOfAppointments(24);
     
    
     std::cout << "Person's name: " << person.name << " Person's gender " << person.getGender() << std::endl;
@@ -185,7 +185,7 @@ int main()
 
     DentalHospitalWrapper dentalHospitalWrapper(new DentalHospital() );
     dentalHospitalWrapper.ptrToDentalHospital->allocatePatientToDentist("Amanda");
-    dentalHospitalWrapper.ptrToDentalHospital->profitByDentist(16, 32);
+    dentalHospitalWrapper.ptrToDentalHospital->returnProfitByDentist(16, 32);
 
     std::cout << "Dentist names: " << dentalHospitalWrapper.ptrToDentalHospital->dentist1.dentistName << " " << dentalHospitalWrapper.ptrToDentalHospital->dentist2.dentistName  << std::endl;
     dentalHospitalWrapper.ptrToDentalHospital->printDentalHospitalInfo();

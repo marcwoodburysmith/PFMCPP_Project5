@@ -27,16 +27,16 @@ struct Dentist
         int dateOfLastCheck = 112022;
 
         std::string getInsuranceCompany(std::string insurance); 
-        int dateOfNextDentalAppointment(int lastCheck); 
+        int getDateOfNextDentalAppointment(int lastCheck); 
         std::string getGender() const; 
-        void numberOfAppointments(int howOld);
+        void getNumberOfAppointments(int howOld);
         void printPersonMemberInfo() const;
     };
 
     int returnLastCheck(std::string name);
-    float feeForService(const std::string& treatmentClassification);
+    float getFeeForService(const std::string& treatmentClassification);
     int payStaff(); 
-    int costPerPatient(int num);
+    int getCostPerPatient(int num);
     void printDentistMemberInfo();
 
     Person newPatient;

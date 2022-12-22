@@ -1,5 +1,3 @@
-
-#include "Wrappers.h"
 #include "DentalHospital.h"
 #include <iostream>
 
@@ -22,7 +20,7 @@ void DentalHospital::allocatePatientToDentist(std::string nme)
     std::cout << "Hello " << patient1.name << ". Your dentist is called: " << dentist1.dentistName << std::endl;
 }
 
-void DentalHospital::profitByDentist(const int& numPatients1, const int& numPatients2)
+void DentalHospital::returnProfitByDentist(const int& numPatients1, const int& numPatients2)
 {
     dentist1.patientsPerWeek = numPatients1;
     dentist2.patientsPerWeek = numPatients2;

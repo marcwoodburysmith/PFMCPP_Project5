@@ -14,7 +14,7 @@ struct DentalHospital
     Dentist::Person patient1, patient2, patient3, patient4;
 
     void allocatePatientToDentist(std::string nme); 
-    void profitByDentist(const int& numPatients1, const int& numPatients2);
+    void returnProfitByDentist(const int& numPatients1, const int& numPatients2);
     void printDentalHospitalInfo() const;
 
     JUCE_LEAK_DETECTOR(DentalHospital)

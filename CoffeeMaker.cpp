@@ -1,5 +1,3 @@
-
-#include "Wrappers.h"
 #include "CoffeeMaker.h"
 #include <iostream>
 
@@ -20,7 +18,7 @@ CoffeeMaker::Cup::Cup()
     cupFull = false;
 }
 
-CoffeeMaker::Cup:: ~Cup()
+CoffeeMaker::Cup::~Cup()
 {
     std::cout << "Cup destructor called" << std::endl;
 }
@@ -43,7 +41,7 @@ void CoffeeMaker::Cup::setCupColour(std::string col)
     std::cout << "Colour set as: " << colour << std::endl;
 }
 
-bool CoffeeMaker::Cup::fillingCup(const float& vol)
+void CoffeeMaker::Cup::fillCup(const float& vol)
 {
     float level = 0;
     while(level < vol)
@@ -53,7 +51,6 @@ bool CoffeeMaker::Cup::fillingCup(const float& vol)
     }
     cupFull = true;
     std::cout << "Cup full" << std::endl;
-    return cupFull;
 }
 
 void CoffeeMaker::Cup::printCupMemberInfo() const
@@ -67,7 +64,7 @@ void CoffeeMaker::heatWater()
     std::cout << "Water heating..." << switchedOn << " Up to temp: " << maxWaterTemp << std::endl;
 }
 
-std::string CoffeeMaker::coffeeType() const
+std::string CoffeeMaker::getCoffeeType() const
 {
     std::cout << "Type of coffee: " << typeOfCoffee << std::endl;
     return typeOfCoffee;
@@ -78,7 +75,7 @@ void CoffeeMaker::switchOff()
     std::cout << "Power: " << switchedOn << std::endl;
 }
 
-float CoffeeMaker::settingTemperature(float waterTemp)
+float CoffeeMaker::setTemperature(float waterTemp)
 {
     float currentTemp = 0;
     maxWaterTemp = waterTemp;
@@ -92,5 +89,5 @@ float CoffeeMaker::settingTemperature(float waterTemp)
 
 void CoffeeMaker::printCoffeeMakerMemberInfo() const
 {
-    std::cout << "Switched on status: " << this->switchedOn << " Coffee type: " << this->coffeeType() << std::endl;
+    std::cout << "Switched on status: " << this->switchedOn << " Coffee type: " << this->getCoffeeType() << std::endl;
 }

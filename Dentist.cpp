@@ -1,5 +1,3 @@
-
-#include "Wrappers.h"
 #include "Dentist.h"
 #include <iostream>
 
@@ -29,7 +27,7 @@ std::string Dentist::Person::getInsuranceCompany(std::string insurance)
     return insuranceCompany;
 }
 
-int Dentist::Person::dateOfNextDentalAppointment(int lastCheck)
+int Dentist::Person::getDateOfNextDentalAppointment(int lastCheck)
 {
     dateOfLastCheck = lastCheck;
     std::cout << name << ": Next routine appointment due " << lastCheck + 1 << std::endl;
@@ -42,7 +40,7 @@ std::string Dentist::Person::getGender() const
     return gender;
 }
 
-void Dentist::Person::numberOfAppointments(int howOld)
+void Dentist::Person::getNumberOfAppointments(int howOld)
 {
     age = howOld;
     int appts = 0;
@@ -66,7 +64,7 @@ int Dentist::returnLastCheck(std::string name)
     return newPatient.dateOfLastCheck;
 }
 
-float Dentist::feeForService(const std::string& treatmentClassification)
+float Dentist::getFeeForService(const std::string& treatmentClassification)
 {
     if( treatmentClassification == "check up" )
     {
@@ -84,7 +82,7 @@ int Dentist::payStaff()
     return ((patientsPerWeek * chargePerPatient) - costDisposableEquipment)/ numStaff; 
 }
 
-int Dentist::costPerPatient(int num)
+int Dentist::getCostPerPatient(int num)
 {
     for(int i = 1; i <= num; i++)
     {
@@ -96,5 +94,5 @@ int Dentist::costPerPatient(int num)
 
 void Dentist::printDentistMemberInfo()
 {
-    std::cout << "Dentist name: " << this->dentistName << " Fee for service (other): " << this->feeForService("other") << std::endl;
+    std::cout << "Dentist name: " << this->dentistName << " Fee for service (other): " << this->getFeeForService("other") << std::endl;
 }

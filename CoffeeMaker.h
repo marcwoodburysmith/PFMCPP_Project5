@@ -31,13 +31,13 @@ struct CoffeeMaker
         void setCupColour(std::string col);
         void printCupMemberInfo() const;
 
-        bool fillingCup(const float& vol);
+        void fillCup(const float& vol);
     };
 
     void heatWater();
-    std::string coffeeType() const;
+    std::string getCoffeeType() const;
     void switchOff();
-    float settingTemperature(float waterTemp);
+    float setTemperature(float waterTemp);
     void printCoffeeMakerMemberInfo() const;
 
     Cup customerCup;
